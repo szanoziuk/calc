@@ -1,11 +1,12 @@
 .inp {
-  width: 100%;
+  width: 180px;
   height: 20px;
-  margin-bottom: 5px;
+  margin: 5px;
 }
 .wrapper {
   margin: 0 auto;
   width: 200px;
+  border: 2px solid lightgray;
 }
 
 .buttons {
@@ -18,10 +19,18 @@
   flex-wrap: wrap;
 }
 
-.btn {
+.btn_num {
   margin: 4px 4px;
   width: 41px;
   height: 40px;
+}
+
+.btn_act,
+.btn {
+  margin: 4px 4px;
+  width: 41px;
+  height: 30px;
+  background: lightblue;
 }
 
 .actions {

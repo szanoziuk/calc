@@ -2,25 +2,76 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { store } from './store';
+// import { store } from './store';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-const one = document.querySelector('.one');
-const two = document.querySelector('.two');
-const three = document.querySelector('.three');
-const four = document.querySelector('.four');
-const five = document.querySelector('.five');
-const six = document.querySelector('.six');
-const seven = document.querySelector('.seven');
-const eight = document.querySelector('.eight');
-const nine = document.querySelector('.nine');
-const nul = document.querySelector('.null');
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+let res = '';
+
+const numbers = getButtons('btn_num').filter(item => item.id !== 'clear');
+const actions = getButtons('btn_act');
 const input = document.querySelector('.inp');
+const clear = document.getElementById('clear');
+const run = document.getElementById('run');
+
+clear.addEventListener( 'click', () => {
+  input.value = '';
+  res = '';
+});
+
+run.addEventListener( 'click', () => {
+  res = calculate( res );
+});
 
 input.addEventListener( 'change', (e) => {
-  console.log( e.target.value );
   input.value = e.target.value;
 });
 
-console.log( one.name );
+
+numbers.forEach( el => {
+  el.addEventListener( 'click', e => {
+    res += e.target.name;
+    input.value = res;
+  });
+});
+
+actions.forEach( el => {
+  el.addEventListener( 'click', e => {
+      res += e.target.name;
+      input.value = res;
+  });
+});
+
+
+function getButtons( className ) {
+  return Array.from( document.querySelectorAll(`.${className}`) );
+}
+
+function calculate( str ) {
+  let result = null;
+  const values = str.match(/\d+(\.\d+)?/g)
+  values.forEach( el => {
+    console.log(el) } );
+  console.log( values );
+
+
+  const action = str.match(/[+\-x/]/g)[0];
+  console.log(action);
+  switch ( action ) {
+    case '+':
+      result = values[0] + values[1];
+      break;
+    case '-':
+      res = values[0] - values[1];
+      break;
+    case 'x':
+      res = values[0] * values[1];
+      break;
+    case '/':
+      res = values[0] / values[1];
+      break;
+    default:
+  }
+  return result + '';
+}
