@@ -20,15 +20,6 @@ clear.addEventListener( 'click', () => {
   res = '';
 });
 
-run.addEventListener( 'click', () => {
-  res = calculate( res );
-});
-
-input.addEventListener( 'change', (e) => {
-  input.value = e.target.value;
-});
-
-
 numbers.forEach( el => {
   el.addEventListener( 'click', e => {
     res += e.target.name;
@@ -38,11 +29,21 @@ numbers.forEach( el => {
 
 actions.forEach( el => {
   el.addEventListener( 'click', e => {
-      res += e.target.name;
-      input.value = res;
+    res += e.target.name;
+    input.value = res;
   });
 });
 
+run.addEventListener( 'click', () => {
+  if ( res.length && !isNaN(res[0]) ) {
+    res = calculate( res );
+    input.value = res;
+  }
+});
+
+input.addEventListener( 'change', (e) => {
+  input.value = e.target.value;
+});
 
 function getButtons( className ) {
   return Array.from( document.querySelectorAll(`.${className}`) );
@@ -50,28 +51,24 @@ function getButtons( className ) {
 
 function calculate( str ) {
   let result = null;
-  const values = str.match(/\d+(\.\d+)?/g)
-  values.forEach( el => {
-    console.log(el) } );
-  console.log( values );
+  const values = str.match(/\d+(\.\d+)?/g).map( el => parseFloat(el) );
+  const action = str.match(/[^\d.]/g);
 
-
-  const action = str.match(/[+\-x/]/g)[0];
-  console.log(action);
-  switch ( action ) {
-    case '+':
-      result = values[0] + values[1];
-      break;
-    case '-':
-      res = values[0] - values[1];
-      break;
-    case 'x':
-      res = values[0] * values[1];
-      break;
-    case '/':
-      res = values[0] / values[1];
-      break;
-    default:
+  if ( action ) {
+    if ( action[0] === '+' ) {
+      result = values[0] + values[1]
+    }
+    if ( action[0] === '-' ) {
+      result = values[0] - values[1];
+    }
+    if ( action[0] === 'x' ) {
+      result = values[0] * values[1];
+    }
+    if ( action[0] === '/' ) {
+      result = values[0] / values[1];
+    }
+    return result + '';
   }
-  return result + '';
+  
+  return result = 'Error';
 }
