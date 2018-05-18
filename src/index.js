@@ -8,7 +8,6 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-
 const initCreateAction = store => typeStr => payload => store.dispatch({ type: typeStr, payload });
 
 const createAction = initCreateAction(store);
@@ -41,19 +40,7 @@ actions.forEach( el => {
   });
 });
 
-run.addEventListener( 'click', () => calculateAction()
-
-// {
-//   if ( res.length && !isNaN(res[0]) ) {
-//     res = calculate( res );
-//     input.value = res;
-//   }
-// }
-);
-
-// input.addEventListener( 'change', (e) => {
-//   input.value = e.target.value;
-// });
+run.addEventListener( 'click', () => calculateAction() );
 
 store.subscribe( function() { render( store ) });
 
