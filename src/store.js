@@ -2,14 +2,14 @@ import { createStore } from 'redux';
 
 const initialState = {
   result: ''
-}
+};
 
 export const store = createStore( function( state = initialState, action) {
   switch ( action.type ) {
     case 'ADD_VALUE':
       return {
         result: state.result + action.payload
-      }
+      };
     case 'CALCULATE': {
       let res = '';
       if ( state.result.length && !isNaN(state.result[0]) ) {
@@ -24,7 +24,7 @@ export const store = createStore( function( state = initialState, action) {
     case 'CLEAR_VALUE':
       return {
         result: ''
-      }
+      };
     default: return state;
   }
 });
@@ -50,5 +50,5 @@ function calculate( str ) {
     return result + '';
   }
 
-  return result = 'Error';
+  return 'Error';
 }

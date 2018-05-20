@@ -42,7 +42,7 @@ actions.forEach( el => {
 
 run.addEventListener( 'click', () => calculateAction() );
 
-store.subscribe( function() { render( store ) });
+store.subscribe( function() { render( store ) } );
 
 function render( store ) {
   input.value = store.getState().result;
